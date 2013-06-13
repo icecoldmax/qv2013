@@ -3,6 +3,8 @@ Qv::Application.routes.draw do
 
   get "static_pages/quiz"
 
+  get "static_pages/setup"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
