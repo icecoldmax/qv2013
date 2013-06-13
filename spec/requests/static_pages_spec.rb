@@ -1,48 +1,28 @@
 require 'spec_helper'
 
 describe "Static Pages" do
+
+  subject { page }
   
   describe "Home page" do
+    before { visit root_path }
     
-    it "should have the H1 'QuizVids'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', :text => 'QuizVids')
-    end
-
-    it "should have the base title" do
-      visit '/static_pages/home'
-      page.should have_selector('title', :text => "QuizVids")
-    end
-
-    it "should not have a custom page title" do
-      visit '/static_pages/home'
-      page.should_not have_selector('title', :text => '| Home')
-    end
+    it { should have_selector('h1', :text => 'QuizVids') }
+    it { should have_selector('title', :text => full_title('')) }
   end
 
   describe "Setup page" do
-    it "should have the H1 'Setup your quiz'" do
-      visit '/static_pages/setup'
-      page.should have_selector('h1', :text => 'Setup your quiz')
-    end
+    before { visit setup_path }
 
-    it "should have the base title" do
-      visit '/static_pages/setup'
-      page.should have_selector('title', :text => "QuizVids")
-    end
+    it { should have_selector('h1', :text => 'Setup your quiz') }
+    it { should have_selector('title', :text => full_title('Setup')) }
   end
 
   describe "Quiz page" do
-
-    it "should have the H1 'Quiz Time!'" do
-      visit '/static_pages/quiz'
-      page.should have_selector('h1', :text => "Quiz Time!")
-    end
-
-    it "should have the base title" do
-      visit '/static_pages/quiz'
-      page.should have_selector('title', :text => "QuizVids")
-    end
+    before { visit quiz_path }
+    
+    it { should have_selector('h1', :text => "Quiz Time!") }
+    it { should have_selector('title', :text => full_title('Quiz')) }    
   end
 
 end
