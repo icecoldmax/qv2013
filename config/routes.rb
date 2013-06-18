@@ -1,6 +1,6 @@
 Qv::Application.routes.draw do
-  get "users/new"
-
+  resources :users
+  
   match '/setup', to: 'static_pages#setup'
   match '/quiz', to: 'static_pages#quiz'
   
