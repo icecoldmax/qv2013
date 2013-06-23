@@ -1,9 +1,10 @@
 Qv::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :quizzes, only: [:new, :create]
   
-  match '/setup', to: 'static_pages#setup'
-  match '/quiz', to: 'static_pages#quiz'
+  match '/setup', to: 'quizzes#new'
+  match '/quiz', to: 'quizzes#create'
   
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'

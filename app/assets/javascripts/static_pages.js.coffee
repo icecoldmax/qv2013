@@ -6,6 +6,15 @@
 
 $ ->
 
+  if current_page is 'setup'
+
+    $('#add-video').click (e) ->
+      html = '<input id="quiz_videos_" name="quiz[videos][]" type="text">'
+      $('#videosForm input[name="quiz[videos][]"]:last').after(html)
+      e.preventDefault()
+
+
+
   if current_page is 'quiz'
 
     tag = document.createElement('script');

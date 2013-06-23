@@ -1,0 +1,25 @@
+<%= javascript_tag "current_page = 'setup';" %>
+
+<% provide(:title, 'Setup') %>
+<div class="center hero-unit">
+<h1>Setup your quiz</h1>
+
+  <div class="row">
+    <div class="span6 offset3">
+      <%= form_for(:quiz, url: quizzes_path, html: {id: 'videosForm'} ) do |f| %>
+
+        <%= text_field_tag "quiz[videos][]" %>
+        
+        <%= link_to "Add one", '#', id: "add-video" %>
+
+        <%= f.submit "Start the quiz!", class: "btn btn-large btn-primary" %>
+
+
+      <% end %>
+    </div>
+  </div>
+
+<!-- <%= link_to "Start the Quiz!", quiz_path, class: "btn btn-large btn-primary" %>
+-->
+</div>
+
