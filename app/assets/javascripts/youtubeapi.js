@@ -1,5 +1,5 @@
 function onYouTubePlayerAPIReady() {
-  console.log("onyoutubeplayerapiready called");
+  // console.log("onyoutubeplayerapiready called");
 
     ytplayer = new YT.Player('ytplayer', {
       width: '100%',
@@ -19,6 +19,7 @@ function onYouTubePlayerAPIReady() {
   }
 
   function onPlayerReady(evt) {
+
     // setInterval(updatePlayerInfo, 1000);
     // updatePlayerInfo();
     // interval = getParameterByName('interval');
@@ -26,6 +27,8 @@ function onYouTubePlayerAPIReady() {
     //initIFrameClick();
     //  evt.target.playVideo();
     console.log("Player is ready");
+
+    ytplayer.loadPlaylist(gon.videos);
   }
    
   function onPlayerStateChange(evt) {

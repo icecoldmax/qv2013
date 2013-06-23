@@ -85,6 +85,14 @@ $ ->
     loadVideo = (id) ->
       ytplayer.loadVideoById(id) if ytplayer
 
+    loadPlaylist = (playlist) ->
+      ytplayer.loadPlaylist(playlist) if ytplayer
+
+    nextVideo = ->
+      ytplayer.nextVideo() if ytplayer
+
+    prevVideo = ->
+      ytplayer.previousVideo() if ytplayer
 
     window.playVideo = playVideo
     window.pauseVideo = pauseVideo
@@ -92,3 +100,6 @@ $ ->
     window.muteVideo = muteVideo
     window.unmuteVideo = unmuteVideo
     window.loadVideo = loadVideo
+    window.loadPlaylist = loadPlaylist
+    window.nextVideo = nextVideo
+    window.prevVideo = prevVideo
