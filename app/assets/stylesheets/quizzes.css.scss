@@ -1,3 +1,24 @@
 // Place all the styles related to the Quizzes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#videosForm {
+  margin-top: 20px;
+}
+
+#searchResults {
+  ul {
+    list-style: none;
+  }
+
+  .videoTitle {
+    font-size: small;
+    color: darkblue;
+  }
+
+  li {
+    display: inline-block;
+    margin-bottom: 1em;
+    cursor: pointer;
+  }
+}

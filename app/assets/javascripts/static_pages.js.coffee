@@ -8,6 +8,51 @@ $ ->
 
   if current_page is 'setup'
 
+    $('#videoSearchButton').click (e) ->
+      searchString = $('#searchInput').val()
+      $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=" + searchString + "&max-results=6&format=5&safeSearch=strict");
+      e.preventDefault()
+
+    addToPlaylist = (videoID) -> 
+      html = "<div class=\"input-append\">
+        <input class=\"span3\" id=\"quiz_videos_\" name=\"quiz[videos][]\" type=\"text\" value=\"#{videoID}\">
+        <button class=\"btn remove\" type=\"button\">
+          <i class=\"icon-remove\"></i>
+        </button>
+        </div>"
+      
+      if $('#videosForm .input-append').length is 0
+        $('#videosForm input[type="submit"]').before(html)
+      else
+        $('#videosForm .input-append:last').after(html)
+
+    $('body').on "click", "button.remove", ->
+      $(this).parent().remove()
+
+    searchVideos = (data) ->
+      feed = data.feed
+      entries = feed.entry || false
+      html = []
+
+      if entries
+        for entry in entries
+          title = entry.title.$t.substr(0, 50)
+          thumbnailUrl = entry.media$group.media$thumbnail[0].url
+          videoID = entry.media$group.yt$videoid.$t
+          html.push "<li onclick=\"addToPlaylist('#{videoID}')\" class=\"span3\" id=\"#{videoID}\"><span class=\"videoTitle\">#{title}</span><br/><img src='#{thumbnailUrl}'></li>"
+
+
+        html = html.join('')
+      else
+        html = "<p>No results</p>"
+
+      $('#searchResults ul').html(html)
+  
+    window.searchVideos = searchVideos
+    window.addToPlaylist = addToPlaylist
+    # window.removeFromPlaylist = removeFromPlaylist
+
+    
     $('#add-video').click (e) ->
       html = '<input id="quiz_videos_" name="quiz[videos][]" type="text">'
       $('#videosForm input[name="quiz[videos][]"]:last').after(html)
