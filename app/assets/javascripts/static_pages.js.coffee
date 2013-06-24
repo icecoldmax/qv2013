@@ -36,10 +36,10 @@ $ ->
 
       if entries
         for entry in entries
-          title = entry.title.$t.substr(0, 50)
+          title = entry.title.$t.substr(0, 30)
           thumbnailUrl = entry.media$group.media$thumbnail[0].url
           videoID = entry.media$group.yt$videoid.$t
-          html.push "<li onclick=\"addToPlaylist('#{videoID}')\" class=\"span3\" id=\"#{videoID}\"><span class=\"videoTitle\">#{title}</span><br/><img src='#{thumbnailUrl}'></li>"
+          html.push "<li onclick=\"addToPlaylist('#{videoID}')\" class=\"span2\" id=\"#{videoID}\"><span class=\"videoTitle\">#{title}</span><br/><img src='#{thumbnailUrl}'></li>"
 
 
         html = html.join('')

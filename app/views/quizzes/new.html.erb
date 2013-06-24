@@ -1,39 +1,39 @@
 <%= javascript_tag "current_page = 'setup';" %>
 
 <% provide(:title, 'Setup') %>
-<div class="center hero-unit">
 <h1>Setup your quiz</h1>
+<hr>
 
-<h3>Video Search</h3>
-
-  <div class="row">
-    <div id="searchBar">
-      <form>
-        <div class="input-append">
-          <input type="text" id="searchInput" placeholder="Search..." class="span3">
-          <input type="submit" id="videoSearchButton" class="btn" value="Search">
-        </div>
-      </form>
-    </div>
+<div class="row">
+  <div class="span4">
+    <h3>Video Playlist</h3>
   </div>
 
-  <div class="row">
-    <div id="searchResults" class="span10">
-      <ul></ul>
-    </div>
+  <div class="span8" id="searchBar">
+    <h3>Youtube Search</h3>
+    <form>
+      <div class="input-append">
+        <input type="text" id="searchInput" placeholder="Search..." class="span3">
+        <input type="submit" id="videoSearchButton" class="btn" value="Search">
+      </div>
+    </form>
   </div>
+</div>
 
-  <div class="row">
-    <div class="span6 offset3">
+<div class="row">
+  <div class="span4">
       <%= form_for(:quiz, url: quizzes_path, html: {id: 'videosForm'} ) do |f| %>
 
         <%= f.submit "Start the quiz!", class: "btn btn-large btn-primary" %>
 
       <% end %>
-    </div>
   </div>
-
+  <div class="span8" id="searchResults">
+    <ul></ul>
+  </div>
+</div>
+    
 <!-- <%= link_to "Start the Quiz!", quiz_path, class: "btn btn-large btn-primary" %>
 -->
-</div>
+
 
