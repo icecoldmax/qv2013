@@ -3,7 +3,7 @@
 <% provide(:title, 'Setup') %>
 <h1>Setup your quiz</h1>
 <hr>
-
+<h2>Video Settings</h2>
 <div class="row">
   <div class="span4">
     <h3>Video Playlist</h3>
@@ -21,17 +21,70 @@
 </div>
 
 <div class="row">
-  <div class="span4">
-      <%= form_for(:quiz, url: quizzes_path, html: {id: 'videosForm'} ) do |f| %>
-
-        <%= f.submit "Start the quiz!", class: "btn btn-large btn-primary" %>
-
-      <% end %>
+  <div class="span3" id="playlist">
+    <div id="emptyPlaylist">
+      <p>Your playlist is currently empty</p>
+      <p>Use the Youtube search to find videos, then click them to add!</p>
+    </div>
+    <%= form_for(:quiz, url: quizzes_path, html: {id: 'videosForm'} ) do |f| %>
   </div>
-  <div class="span8" id="searchResults">
+  
+  <div class="span8 offset1" id="searchResults">
     <ul></ul>
   </div>
 </div>
+<hr>
+<h2>Question Settings</h2>
+
+<div class="row">
+
+  <div class="span4">
+    <h3>Interval</h3>
+    <p>One question every <%= number_field_tag 'quiz[interval]', 30, min: 30, max: 300, step: 15, class: "input-mini" %> seconds.</p>
+  </div>
+  
+  <div class="span8" id="quizOptions">
+    <h3>Question Types</h3>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>From</th>
+          <th>To</th>
+          <th>Enable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Addition</th>
+          <td><%= number_field_tag 'quiz[arithmetic][add_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
+          <td><%= number_field_tag 'quiz[arithmetic][add_to]', 20, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][add_on]' %></td>
+        </tr>
+        <tr>
+          <th>Subtraction</th>
+          <td><%= number_field_tag 'quiz[arithmetic][sub_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
+          <td><%= number_field_tag 'quiz[arithmetic][sub_to]', 20, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][sub_on]' %></td>
+        </tr>
+      </tbody>   
+    </table>
+  </div>
+
+
+</div>
+
+
+
+<div class="row">
+  <div class="span2">
+  <%= f.submit "Start the quiz!", class: "btn btn-large btn-primary" %>
+
+  <% end %>
+  </div>
+</div>
+
     
 <!-- <%= link_to "Start the Quiz!", quiz_path, class: "btn btn-large btn-primary" %>
 -->

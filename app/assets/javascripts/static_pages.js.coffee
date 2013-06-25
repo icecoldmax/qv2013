@@ -8,26 +8,31 @@ $ ->
 
   if current_page is 'setup'
 
+    $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=disney&max-results=8&format=5&safeSearch=strict");
+
     $('#videoSearchButton').click (e) ->
       searchString = $('#searchInput').val()
-      $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=" + searchString + "&max-results=6&format=5&safeSearch=strict");
+      $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=" + searchString + "&max-results=8&format=5&safeSearch=strict");
       e.preventDefault()
 
     addToPlaylist = (videoID) -> 
       html = "<div class=\"input-append\">
-        <input class=\"span3\" id=\"quiz_videos_\" name=\"quiz[videos][]\" type=\"text\" value=\"#{videoID}\">
+        <input class=\"span2\" id=\"quiz_videos_\" name=\"quiz[videos][]\" type=\"text\" value=\"#{videoID}\">
         <button class=\"btn remove\" type=\"button\">
           <i class=\"icon-remove\"></i>
         </button>
         </div>"
       
       if $('#videosForm .input-append').length is 0
-        $('#videosForm input[type="submit"]').before(html)
+        $('#videosForm').append(html)
+        $('#emptyPlaylist').hide()
       else
         $('#videosForm .input-append:last').after(html)
 
     $('body').on "click", "button.remove", ->
       $(this).parent().remove()
+      if $('#videosForm .input-append').length is 0
+        $('#emptyPlaylist').show()
 
     searchVideos = (data) ->
       feed = data.feed
@@ -36,7 +41,7 @@ $ ->
 
       if entries
         for entry in entries
-          title = entry.title.$t.substr(0, 30)
+          title = entry.title.$t.substr(0, 20) + "..."
           thumbnailUrl = entry.media$group.media$thumbnail[0].url
           videoID = entry.media$group.yt$videoid.$t
           html.push "<li onclick=\"addToPlaylist('#{videoID}')\" class=\"span2\" id=\"#{videoID}\"><span class=\"videoTitle\">#{title}</span><br/><img src='#{thumbnailUrl}'></li>"
