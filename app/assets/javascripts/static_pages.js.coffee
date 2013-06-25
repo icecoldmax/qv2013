@@ -53,10 +53,10 @@ $ ->
     # window.removeFromPlaylist = removeFromPlaylist
 
     
-    $('#add-video').click (e) ->
-      html = '<input id="quiz_videos_" name="quiz[videos][]" type="text">'
-      $('#videosForm input[name="quiz[videos][]"]:last').after(html)
-      e.preventDefault()
+    # $('#add-video').click (e) ->
+    #   html = '<input id="quiz_videos_" name="quiz[videos][]" type="text">'
+    #   $('#videosForm input[name="quiz[videos][]"]:last').after(html)
+    #   e.preventDefault()
 
 
 

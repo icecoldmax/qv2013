@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
 gem 'gon'
@@ -10,6 +11,7 @@ gem 'gon'
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.11.0'
+  gem 'quiet_assets'
 end
 
 group :development do
