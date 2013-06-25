@@ -8,11 +8,11 @@ $ ->
 
   if current_page is 'setup'
 
-    $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=disney&max-results=8&format=5&safeSearch=strict");
+    $.getScript("https://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=disney&max-results=8&format=5&safeSearch=strict");
 
     $('#videoSearchButton').click (e) ->
       searchString = $('#searchInput').val()
-      $.getScript("http://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=" + searchString + "&max-results=8&format=5&safeSearch=strict");
+      $.getScript("https://gdata.youtube.com/feeds/api/videos?v=2&alt=json-in-script&callback=searchVideos&q=" + searchString + "&max-results=8&format=5&safeSearch=strict");
       e.preventDefault()
 
     addToPlaylist = (videoID) -> 
