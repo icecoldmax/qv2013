@@ -68,7 +68,7 @@ $ ->
   if current_page is 'quiz'
 
     tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/player_api";
+    tag.src = "https://www.youtube.com/player_api";
     firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
