@@ -53,7 +53,7 @@
 body .modal.fade.in {
   background-color: black;
   top: 70%;
-  
+
   .modal-body {
     border: solid 1px linen;
     text-align: center;
@@ -73,6 +73,7 @@ body .modal.fade.in {
         border: solid linen 1px;
         width: 50%;
         font-size: 1.5em;
+        cursor: pointer;
       }
     }
   }
