@@ -49,3 +49,32 @@
 .inline * {
   display: inline;
 }
+
+body .modal.fade.in {
+  background-color: black;
+  top: 70%;
+  
+  .modal-body {
+    border: solid 1px linen;
+    text-align: center;
+    color: lightblue;
+    
+    #questionText {
+      font-size: 2em;
+    }
+
+    table {
+      width: 75%;
+      margin: 1px auto;
+      border-collapse: collapse;
+
+      td {
+        height: 40px;
+        border: solid linen 1px;
+        width: 50%;
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
