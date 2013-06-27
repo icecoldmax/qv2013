@@ -75,6 +75,8 @@ $ ->
   if current_page is 'quiz'
 
 # Youtube Stuff
+    console.log gon.arithmetic
+    window.questionTypes = { "enabled": [] }
 
     tag = document.createElement('script');
     tag.src = "https://www.youtube.com/player_api";
@@ -110,19 +112,20 @@ $ ->
 
 
 # Prepping the Quiz
-    questionTypes = { "enabled": [] }
+    console.log gon.arithmetic
+    
     
     if gon.arithmetic['add_on'] is '1'
-      questionTypes["add"] =
+      window.questionTypes["add"] =
        "from": gon.arithmetic['add_from']
        "to": gon.arithmetic['add_to']
-      questionTypes["enabled"].push "add"
+      window.questionTypes["enabled"].push "add"
 
     if gon.arithmetic['sub_on'] is '1'
-      questionTypes["sub"] =
+      window.questionTypes["sub"] =
         "from": gon.arithmetic['sub_from']
         "to": gon.arithmetic['sub_to']
-      questionTypes["enabled"].push "sub"
+      window.questionTypes["enabled"].push "sub"
     
     console.log(questionTypes)
 
@@ -167,18 +170,20 @@ $ ->
 # Showing the Quiz
 
     showQuiz = ->
+      pauseVideo()
+
       $('#quizResult').text ""
       
       answerPositions = [0, 1, 2, 3]
       correctAnswerPosition = rand(0, 3)
       randomAnswers = []
 
-      questionTypesCount = Object.keys(questionTypes).length
-      thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
+      questionTypesCount = Object.keys(window.questionTypes).length
+      thisQuestionType = window.questionTypes["enabled"][rand(0, (questionTypesCount-1))]
       console.log "ThisQuestionType is #{thisQuestionType}"
 
-      start = questionTypes[thisQuestionType]["from"]
-      end = questionTypes[thisQuestionType]["to"]
+      start = window.questionTypes[thisQuestionType]["from"]
+      end = window.questionTypes[thisQuestionType]["to"]
       operator = thisQuestionType
 
       console.log "start: #{start}, end: #{end}, operator: #{operator}"
@@ -222,6 +227,10 @@ $ ->
         $('#quizResult').text "Try again :("
         $('#quizModal').css "background-color": "pink"
         $('#quizModal').animate "background-color": "rgb(220,20,60)", 600
+
+    $('#quizModal').on "hidden", ->
+      $('#quizModal').css "background-color": "black"
+      playVideo()
 
 
 

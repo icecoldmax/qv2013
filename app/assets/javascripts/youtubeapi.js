@@ -33,15 +33,18 @@ function onYouTubePlayerAPIReady() {
    
   function onPlayerStateChange(evt) {
     console.log("player state change");
-    // var newState = evt.data;
+    var newState = evt.data;
     // updateHTML("playerState", newState);
-    // console.log("newState: " + newState);
+    console.log("newState: " + newState);
     // if (newState == 0 || newState == 2 || newState == 3 || newState == 5) {
     //   clearInterval(t);
     //   console.log("clearInterval ran (state change)");
     // } else if (newState == 1) {
     //   t = setInterval(stopAtTime, 1000, interval);
     // }
+    if (newState == 1) {
+      setTimeout(showQuiz, gon.interval * 1000)
+    }
 
   }
 
