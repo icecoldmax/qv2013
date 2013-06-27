@@ -110,7 +110,6 @@ $ ->
 
 
 # Prepping the Quiz
-
     questionTypes = { "enabled": [] }
     
     if gon.arithmetic['add_on'] is '1'
@@ -165,6 +164,7 @@ $ ->
 
       return correctAns
       
+# Showing the Quiz
 
     showQuiz = ->
       $('#quizResult').text ""
@@ -183,7 +183,7 @@ $ ->
 
       console.log "start: #{start}, end: #{end}, operator: #{operator}"
       correctAns = generateQuestion start, end, operator, false
-   
+      window.correctAns = correctAns
       $(quizAnswerSpans[correctAnswerPosition]).text correctAns
       answerPositions.remove correctAnswerPosition
 
@@ -199,6 +199,30 @@ $ ->
           $(quizAnswerSpans[answerPos]).text randomAnswer
 
       $('#quizModal').modal 'show'
+
+# Catching the answers
+    
+    $('#quizAnswerTable td').click ->
+      clickedAnswer = parseInt $(this).text()
+      console.log "Clicked #{clickedAnswer} - correctAns is #{correctAns}"
+      # console.log "clicked: #{typeof clickedAnswer}"
+      # console.log "correct: #{typeof correctAns}"
+
+      if clickedAnswer is correctAns or parseInt clickedAnswer is correctAns
+        console.log "clickedAnswer == correctAns"
+        $('#quizResult').text "Correct!"
+        $('#quizModal').css "background-color": "lightgreen"
+        $('#quizModal').animate "background-color": "green", 600
+        
+        setTimeout (->
+          $('#quizModal').modal 'hide'
+        ), 500
+
+      else
+        $('#quizResult').text "Try again :("
+        $('#quizModal').css "background-color": "pink"
+        $('#quizModal').animate "background-color": "rgb(220,20,60)", 600
+
 
 
     window.playVideo = playVideo
