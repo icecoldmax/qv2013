@@ -178,10 +178,11 @@ $ ->
       correctAnswerPosition = rand(0, 3)
       randomAnswers = []
 
-      questionTypesCount = Object.keys(questionTypes).length
+      # questionTypesCount = Object.keys(questionTypes).length
+      questionTypesCount = questionTypes["enabled"].length
       console.log questionTypesCount
 
-      thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-2))]
+      thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
       console.log "ThisQuestionType is #{thisQuestionType}"
 
       start = questionTypes[thisQuestionType]["from"]
