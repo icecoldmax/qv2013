@@ -76,7 +76,7 @@ $ ->
 
 # Youtube Stuff
     console.log gon.arithmetic
-    window.questionTypes = { "enabled": [] }
+    questionTypes = { "enabled": [] }
 
     tag = document.createElement('script');
     tag.src = "https://www.youtube.com/player_api";
@@ -112,20 +112,20 @@ $ ->
 
 
 # Prepping the Quiz
-    console.log gon.arithmetic
+    # console.log gon.arithmetic
     
     
     if gon.arithmetic['add_on'] is '1'
-      window.questionTypes["add"] =
+      questionTypes["add"] =
        "from": gon.arithmetic['add_from']
        "to": gon.arithmetic['add_to']
-      window.questionTypes["enabled"].push "add"
+      questionTypes["enabled"].push "add"
 
     if gon.arithmetic['sub_on'] is '1'
-      window.questionTypes["sub"] =
+      questionTypes["sub"] =
         "from": gon.arithmetic['sub_from']
         "to": gon.arithmetic['sub_to']
-      window.questionTypes["enabled"].push "sub"
+      questionTypes["enabled"].push "sub"
     
     console.log(questionTypes)
 
@@ -178,12 +178,14 @@ $ ->
       correctAnswerPosition = rand(0, 3)
       randomAnswers = []
 
-      questionTypesCount = Object.keys(window.questionTypes).length
-      thisQuestionType = window.questionTypes["enabled"][rand(0, (questionTypesCount-1))]
+      questionTypesCount = Object.keys(questionTypes).length
+      console.log questionTypesCount
+
+      thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-2))]
       console.log "ThisQuestionType is #{thisQuestionType}"
 
-      start = window.questionTypes[thisQuestionType]["from"]
-      end = window.questionTypes[thisQuestionType]["to"]
+      start = questionTypes[thisQuestionType]["from"]
+      end = questionTypes[thisQuestionType]["to"]
       operator = thisQuestionType
 
       console.log "start: #{start}, end: #{end}, operator: #{operator}"
