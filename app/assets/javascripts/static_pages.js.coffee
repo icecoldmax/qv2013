@@ -4,6 +4,13 @@
 
 # alert gon.ass
 
+Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
+
+rand = (min, max) ->
+  Math.round(Math.random() * (max - min)) + min
+
+window.rand = rand
+
 $ ->
 
   if current_page is 'setup'
@@ -67,6 +74,8 @@ $ ->
 
   if current_page is 'quiz'
 
+# Youtube Stuff
+
     tag = document.createElement('script');
     tag.src = "https://www.youtube.com/player_api";
     firstScriptTag = document.getElementsByTagName('script')[0];
@@ -99,6 +108,93 @@ $ ->
     prevVideo = ->
       ytplayer.previousVideo() if ytplayer
 
+
+# Prepping the Quiz
+
+    questionTypes = { "enabled": [] }
+    
+    if gon.arithmetic['add_on'] is '1'
+      questionTypes["add"] =
+       "from": gon.arithmetic['add_from']
+       "to": gon.arithmetic['add_to']
+      questionTypes["enabled"].push "add"
+
+    if gon.arithmetic['sub_on'] is '1'
+      questionTypes["sub"] =
+        "from": gon.arithmetic['sub_from']
+        "to": gon.arithmetic['sub_to']
+      questionTypes["enabled"].push "sub"
+    
+    console.log(questionTypes)
+
+    quizAnswerSpans = $('.quizAnswerSpan')
+    # correctAns = ""
+
+    insertQuestionText = (rand1, rand2, symbol, flip) ->
+      if not flip
+        $('#questionText').html "What is <span id='rand1'>#{rand1}</span> <span id='operand'>#{symbol}</span> <span id='rand2'>#{rand2}</span>?"
+      else
+        $('#questionText').html "What is <span id='rand1'>#{rand2}</span> <span id='operand'>#{symbol}</span> <span id='rand2'>#{rand1}</span>?"
+
+    generateQuestion = (start, end, operator, randoms) ->
+      start = parseInt(start, 10)
+      end = parseInt(end, 10) 
+      rand1 = rand(start, end)
+      rand2 = rand(start, end)
+      flip = false
+      console.log(rand1 + " and " + rand2)
+
+      switch operator
+        when "add"
+          correctAns = rand1 + rand2
+          operatorSymbol = "+"
+        when "sub"
+          operatorSymbol = "-"
+          if rand1 >= rand2
+            correctAns = rand1 - rand2
+          else
+            correctAns = rand2 - rand1
+            flip = true
+
+      if not randoms
+        insertQuestionText rand1, rand2, operatorSymbol, flip
+        console.log "#{rand1} #{operatorSymbol} #{rand2}. correctAns is #{correctAns}"
+      else
+        console.log "random:"
+      end
+
+      return correctAns
+      
+
+    showQuiz = ->
+      $('#quizModal').modal 'show'
+      start = 1
+      end = 10
+      operator = "sub"
+      answerPositions = [0, 1, 2, 3]
+      correctAnswerPosition = rand(0, 3)
+      randomAnswers = []
+      correctAns = generateQuestion start, end, operator, false
+
+      questionTypesCount = Object.keys(questionTypes).length
+
+      thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
+      $('#quizResult').text ""
+      $(quizAnswerSpans[correctAnswerPosition]).text correctAns
+      answerPositions.remove correctAnswerPosition
+
+      for answerPos in answerPositions
+        if thisQuestionType is "add" or thisQuestionType is "sub"
+          randomAnswer = generateQuestion start, end, operator, true
+          
+          while randomAnswer is correctAns or randomAnswer in randomAnswers
+            randomAnswer += 1
+
+          randomAnswers.push randomAnswer 
+
+          $(quizAnswerSpans[answerPos]).text randomAnswer
+
+
     window.playVideo = playVideo
     window.pauseVideo = pauseVideo
     window.stopVideo = stopVideo
@@ -108,3 +204,6 @@ $ ->
     window.loadPlaylist = loadPlaylist
     window.nextVideo = nextVideo
     window.prevVideo = prevVideo
+    
+    window.generateQuestion = generateQuestion
+    window.showQuiz = showQuiz
