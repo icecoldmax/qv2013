@@ -167,19 +167,23 @@ $ ->
       
 
     showQuiz = ->
-      $('#quizModal').modal 'show'
-      start = 1
-      end = 10
-      operator = "sub"
+      $('#quizResult').text ""
+      
       answerPositions = [0, 1, 2, 3]
       correctAnswerPosition = rand(0, 3)
       randomAnswers = []
-      correctAns = generateQuestion start, end, operator, false
 
       questionTypesCount = Object.keys(questionTypes).length
-
       thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
-      $('#quizResult').text ""
+      console.log "ThisQuestionType is #{thisQuestionType}"
+
+      start = questionTypes[thisQuestionType]["from"]
+      end = questionTypes[thisQuestionType]["to"]
+      operator = thisQuestionType
+
+      console.log "start: #{start}, end: #{end}, operator: #{operator}"
+      correctAns = generateQuestion start, end, operator, false
+   
       $(quizAnswerSpans[correctAnswerPosition]).text correctAns
       answerPositions.remove correctAnswerPosition
 
@@ -193,6 +197,8 @@ $ ->
           randomAnswers.push randomAnswer 
 
           $(quizAnswerSpans[answerPos]).text randomAnswer
+
+      $('#quizModal').modal 'show'
 
 
     window.playVideo = playVideo
