@@ -62,20 +62,11 @@ $ ->
   
     window.searchVideos = searchVideos
     window.addToPlaylist = addToPlaylist
-    # window.removeFromPlaylist = removeFromPlaylist
-
     
-    # $('#add-video').click (e) ->
-    #   html = '<input id="quiz_videos_" name="quiz[videos][]" type="text">'
-    #   $('#videosForm input[name="quiz[videos][]"]:last').after(html)
-    #   e.preventDefault()
-
-
-
   if current_page is 'quiz'
 
 # Youtube Stuff
-    console.log gon.arithmetic
+    # console.log gon.arithmetic
     questionTypes = { "enabled": [] }
 
     tag = document.createElement('script');
@@ -112,8 +103,6 @@ $ ->
 
 
 # Prepping the Quiz
-    # console.log gon.arithmetic
-    
     
     if gon.arithmetic['add_on'] is '1'
       questionTypes["add"] =
@@ -127,10 +116,9 @@ $ ->
         "to": gon.arithmetic['sub_to']
       questionTypes["enabled"].push "sub"
     
-    console.log(questionTypes)
+    # console.log(questionTypes)
 
     quizAnswerSpans = $('.quizAnswerSpan')
-    # correctAns = ""
 
     insertQuestionText = (rand1, rand2, symbol, flip) ->
       if not flip
@@ -144,7 +132,7 @@ $ ->
       rand1 = rand(start, end)
       rand2 = rand(start, end)
       flip = false
-      console.log(rand1 + " and " + rand2)
+      # console.log(rand1 + " and " + rand2)
 
       switch operator
         when "add"
@@ -160,9 +148,9 @@ $ ->
 
       if not randoms
         insertQuestionText rand1, rand2, operatorSymbol, flip
-        console.log "#{rand1} #{operatorSymbol} #{rand2}. correctAns is #{correctAns}"
+        # console.log "#{rand1} #{operatorSymbol} #{rand2}. correctAns is #{correctAns}"
       else
-        console.log "random:"
+        # console.log "random:"
       end
 
       return correctAns
@@ -178,18 +166,17 @@ $ ->
       correctAnswerPosition = rand(0, 3)
       randomAnswers = []
 
-      # questionTypesCount = Object.keys(questionTypes).length
       questionTypesCount = questionTypes["enabled"].length
-      console.log questionTypesCount
+      # console.log "#{questionTypesCount} question types enabled"
 
       thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
-      console.log "ThisQuestionType is #{thisQuestionType}"
+      # console.log "ThisQuestionType is #{thisQuestionType}"
 
       start = questionTypes[thisQuestionType]["from"]
       end = questionTypes[thisQuestionType]["to"]
       operator = thisQuestionType
 
-      console.log "start: #{start}, end: #{end}, operator: #{operator}"
+      # console.log "start: #{start}, end: #{end}, operator: #{operator}"
       correctAns = generateQuestion start, end, operator, false
       window.correctAns = correctAns
       $(quizAnswerSpans[correctAnswerPosition]).text correctAns
@@ -212,12 +199,10 @@ $ ->
     
     $('#quizAnswerTable td').click ->
       clickedAnswer = parseInt $(this).text()
-      console.log "Clicked #{clickedAnswer} - correctAns is #{correctAns}"
-      # console.log "clicked: #{typeof clickedAnswer}"
-      # console.log "correct: #{typeof correctAns}"
+      # console.log "Clicked #{clickedAnswer} - correctAns is #{correctAns}"
 
       if clickedAnswer is correctAns or parseInt clickedAnswer is correctAns
-        console.log "clickedAnswer == correctAns"
+        # console.log "clickedAnswer == correctAns"
         $('#quizResult').text "Correct!"
         $('#quizModal').css "background-color": "lightgreen"
         $('#quizModal').animate "background-color": "green", 600
