@@ -26,24 +26,29 @@ function onYouTubePlayerAPIReady() {
     // ytplayer.loadPlaylist(vids);
     //initIFrameClick();
     //  evt.target.playVideo();
-    console.log("Player is ready");
+    // console.log("Player is ready");
 
     ytplayer.loadPlaylist(gon.videos);
   }
    
   function onPlayerStateChange(evt) {
-    console.log("player state change");
+    // console.log("player state change");
     var newState = evt.data;
     // updateHTML("playerState", newState);
-    console.log("newState: " + newState);
+    // console.log("newState: " + newState);
     // if (newState == 0 || newState == 2 || newState == 3 || newState == 5) {
     //   clearInterval(t);
     //   console.log("clearInterval ran (state change)");
     // } else if (newState == 1) {
     //   t = setInterval(stopAtTime, 1000, interval);
     // }
-    if (newState == 1) {
-      setTimeout(showQuiz, gon.interval * 1000)
+    if (newState == 0 || newState == 2 || newState == 3 || newState == 5) {
+      if (t) {
+        clearTimeout(t);
+        // console.log("timeout cleared")
+      }
+    } else if (newState == 1) {
+      t = setTimeout(showQuiz, gon.interval * 1000)
     }
 
   }
