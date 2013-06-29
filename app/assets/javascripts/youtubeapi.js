@@ -2,8 +2,8 @@ function onYouTubePlayerAPIReady() {
   // console.log("onyoutubeplayerapiready called");
 
     ytplayer = new YT.Player('ytplayer', {
-      width: '100%',
-      height: '100%',
+      width: '200px',
+      height: '200px',
       //videoId: getParameterByName('vid0'),
       playerVars: { 'autoplay': 0, 'controls': 0, 'wmode': 'opaque',
                   //'playlist': vids.join(),

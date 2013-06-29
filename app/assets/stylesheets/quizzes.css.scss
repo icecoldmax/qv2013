@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.withBackground {
+  padding-top: 0px;
+
+  #background {
+    width: 1024px;
+    height: 768px;
+    background-image: url(/assets/theater1024.jpg);
+    background-size: 1024px 768px;
+    background-repeat: no-repeat;
+  }
+}
+
 #videosForm {
   margin-top: 20px;
 }
