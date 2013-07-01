@@ -60,25 +60,25 @@
           <th>Addition</th>
           <td><%= number_field_tag 'quiz[arithmetic][add_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
           <td><%= number_field_tag 'quiz[arithmetic][add_to]', 20, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= check_box_tag 'quiz[arithmetic][add_on]' %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][add_on]', 1, true %></td>
         </tr>
         <tr>
           <th>Subtraction</th>
           <td><%= number_field_tag 'quiz[arithmetic][sub_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
           <td><%= number_field_tag 'quiz[arithmetic][sub_to]', 20, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= check_box_tag 'quiz[arithmetic][sub_on]' %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][sub_on]', 1, true %></td>
         </tr>
         <tr>
           <th>Multiplication</th>
           <td><%= number_field_tag 'quiz[arithmetic][multi_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
           <td><%= number_field_tag 'quiz[arithmetic][multi_to]', 20, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= check_box_tag 'quiz[arithmetic][multi_on]' %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][multi_on]', 1, true %></td>
         </tr>
         <tr>
           <th>Times-Table Division</th>
           <td><%= number_field_tag 'quiz[arithmetic][div_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
           <td><%= number_field_tag 'quiz[arithmetic][div_to]', 12, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= check_box_tag 'quiz[arithmetic][div_on]' %></td>          
+          <td><%= check_box_tag 'quiz[arithmetic][div_on]', 1, true %></td>          
         </tr>
       </tbody>   
     </table>
