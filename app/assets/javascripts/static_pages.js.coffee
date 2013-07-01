@@ -115,8 +115,23 @@ $ ->
         "from": gon.arithmetic['sub_from']
         "to": gon.arithmetic['sub_to']
       questionTypes["enabled"].push "sub"
+
+    if gon.arithmetic['multi_on'] is '1'
+      questionTypes["multi"] =
+        "from": gon.arithmetic['multi_from']
+        "to": gon.arithmetic['multi_to']
+      questionTypes["enabled"].push "multi"
+
+    if gon.arithmetic['div_on'] is '1'
+      questionTypes["div"] =
+        "from": gon.arithmetic['div_from']
+        "to": gon.arithmetic['div_to']
+      questionTypes["div_by"] =
+        "from": gon.arithmetic['div_by_from']
+        "to": gon.arithmetic['div_by_to']
+      questionTypes["enabled"].push "div"
     
-    # console.log(questionTypes)
+    console.log questionTypes
 
     quizAnswerSpans = $('.quizAnswerSpan')
 
@@ -145,6 +160,9 @@ $ ->
           else
             correctAns = rand2 - rand1
             flip = true
+        when "multi"
+          operatorSymbol = "x"
+          correctAns = rand1 * rand2
 
       if not randoms
         insertQuestionText rand1, rand2, operatorSymbol, flip
@@ -167,10 +185,10 @@ $ ->
       randomAnswers = []
 
       questionTypesCount = questionTypes["enabled"].length
-      # console.log "#{questionTypesCount} question types enabled"
+      console.log "#{questionTypesCount} question types enabled"
 
       thisQuestionType = questionTypes["enabled"][rand(0, (questionTypesCount-1))]
-      # console.log "ThisQuestionType is #{thisQuestionType}"
+      console.log "ThisQuestionType is #{thisQuestionType}"
 
       start = questionTypes[thisQuestionType]["from"]
       end = questionTypes[thisQuestionType]["to"]
@@ -183,7 +201,7 @@ $ ->
       answerPositions.remove correctAnswerPosition
 
       for answerPos in answerPositions
-        if thisQuestionType is "add" or thisQuestionType is "sub"
+        if thisQuestionType is "add" or thisQuestionType is "sub" or thisQuestionType is "multi"
           randomAnswer = generateQuestion start, end, operator, true
           
           while randomAnswer is correctAns or randomAnswer in randomAnswers
