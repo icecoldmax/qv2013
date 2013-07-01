@@ -75,16 +75,10 @@
           <td><%= check_box_tag 'quiz[arithmetic][multi_on]' %></td>
         </tr>
         <tr>
-          <th>Division of numbers from...</th>
+          <th>Times-Table Division</th>
           <td><%= number_field_tag 'quiz[arithmetic][div_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= number_field_tag 'quiz[arithmetic][div_to]', 144, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-        </tr>
-        <tr>
-          <th>...by numbers from</th>
-          <td><%= number_field_tag 'quiz[arithmetic][div_by_from]', 1, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
-          <td><%= number_field_tag 'quiz[arithmetic][div_by_to]', 12, min: 1, max: 1000, step: 1, class: "input-mini" %></td>  
-
-          <td><%= check_box_tag 'quiz[arithmetic][div_on]' %></td>
+          <td><%= number_field_tag 'quiz[arithmetic][div_to]', 12, min: 1, max: 1000, step: 1, class: "input-mini" %></td>
+          <td><%= check_box_tag 'quiz[arithmetic][div_on]' %></td>          
         </tr>
       </tbody>   
     </table>

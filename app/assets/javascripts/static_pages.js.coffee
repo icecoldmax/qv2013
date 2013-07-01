@@ -126,9 +126,6 @@ $ ->
       questionTypes["div"] =
         "from": gon.arithmetic['div_from']
         "to": gon.arithmetic['div_to']
-      questionTypes["div_by"] =
-        "from": gon.arithmetic['div_by_from']
-        "to": gon.arithmetic['div_by_to']
       questionTypes["enabled"].push "div"
     
     console.log questionTypes
@@ -163,6 +160,13 @@ $ ->
         when "multi"
           operatorSymbol = "x"
           correctAns = rand1 * rand2
+        when "div"
+          operatorSymbol = "/"
+          # console.log "here is gon.arithmetic[div_by_from']: #{gon.arithmetic['div_by_from']}"
+          rand1 = rand1 * rand2
+          
+          correctAns = rand1 / rand2
+
 
       if not randoms
         insertQuestionText rand1, rand2, operatorSymbol, flip
@@ -201,15 +205,15 @@ $ ->
       answerPositions.remove correctAnswerPosition
 
       for answerPos in answerPositions
-        if thisQuestionType is "add" or thisQuestionType is "sub" or thisQuestionType is "multi"
-          randomAnswer = generateQuestion start, end, operator, true
-          
-          while randomAnswer is correctAns or randomAnswer in randomAnswers
-            randomAnswer += 1
+      # if thisQuestionType is "add" or thisQuestionType is "sub" or thisQuestionType is "multi"
+        randomAnswer = generateQuestion start, end, operator, true
+        
+        while randomAnswer is correctAns or randomAnswer in randomAnswers
+          randomAnswer += 1
 
-          randomAnswers.push randomAnswer 
+        randomAnswers.push randomAnswer 
 
-          $(quizAnswerSpans[answerPos]).text randomAnswer
+        $(quizAnswerSpans[answerPos]).text randomAnswer
 
       $('#quizModal').modal 'show'
 
